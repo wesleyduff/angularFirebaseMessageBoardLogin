@@ -23,24 +23,11 @@
         }
     })
     
-    .directive('stream', function(){
-       return {
-           templateUrl : '/login/angular.directives/stream.html'
-       } 
-    })
-    
     .directive('message', function(){
         return {
             templateUrl : '/login/angular.directives/messageForm.html'
         }
     })
-    
-    .directive('streampost', function(){
-        return {
-            restrict : 'A',
-            templateUrl : '/login/angular.directives/streampost.html'
-        }
-    });
     
     
 })(angular);
