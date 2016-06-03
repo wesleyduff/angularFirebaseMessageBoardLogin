@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="fireUIModule">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sample FirebaseUI App</title>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-auth.js"></script>
+    
+    <script data-require="angularjs@1.5.5" data-semver="1.5.5" src="https://code.angularjs.org/1.5.5/angular.js"></script>
+    <script src="https://rawgit.com/angular/bower-angular-resource/master/angular-resource.js"></script>
+    
+    <script src="config.js"></script>
+    <script src="fire.js"></script>
+  </head>
+  <body ng-controller="FireController">
+    <h1>{{title}}</h1>
+    <h2>Welcome : <span style="font-weight:normal;">{{activeuser.displayName}} : {{activeuser.email}}</span></h2>
+  </body>
+</html>

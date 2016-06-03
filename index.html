@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="uiApp">
+
+  <head>
+    <script data-require="angularjs@1.5.5" data-semver="1.5.5" src="https://code.angularjs.org/1.5.5/angular.js"></script>
+    <link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+    <link rel="stylesheet" href="demo.css" />
+    <script src="https://rawgit.com/angular/bower-angular-resource/master/angular-resource.js"></script>
+    <script src="script.js"></script>
+  </head>
+
+  <body>
+    <div ng-controller="MainController" class="container" style="padding-top:30px">
+      <h1>{{Title}}</h1>
+      <h2>From Group : <span style="font-weight:100">{{subTitle}}</span></h2>
+      
+      <div ng-repeat="profile in users" class="row">
+        <div class="col-sm-6">
+          <div id="tb-testimonial" class="testimonial testimonial-default">
+            <div class="testimonial-section">
+                  Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.
+          	</div>
+            <div class="testimonial-desc">
+              <img ng-src="{{profile.picture.thumbnail}}" alt="" />
+              <div class="testimonial-writer">
+                <div class="testimonial-writer-name">{{profile.name.title}} {{profile.name.first}} {{profile.name.last}}</div>
+                <div class="testimonial-writer-contact">
+                  {{profile.cell}} | {{profile.email}}
+                  <address>
+                    {{profile.location.street}}
+                    <br/>
+                    {{profile.location.city}} {{profile.location.state}} {{profile.location.postcode}}
+                  </address>
+                </div>
+                <div class="testimonial-writer-designation">Front End Developer</div>
+                <a href="#" class="testimonial-writer-company">Touch Base Inc</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>

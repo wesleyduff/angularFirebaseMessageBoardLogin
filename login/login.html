@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="LoginUIModule">
+  <head>
+    <meta charset="UTF-8">
+    <title>Sample FirebaseUI App : Login</title>
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
+    <!-- Angular Module for this app -->
+    <script src="angular.modules/module.login.js"></script>
+    <script src="angular.servers/service.auth.js?e"></script>
+    <script src="angular.controllers/controller.login.js"></script>
+    <script src="angular.directives/directive.user.js"></script>
+     <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../style.css" >
+  </head>
+ <link href='http://fonts.googleapis.com/css?family=Raleway:500' rel='stylesheet' type='text/css'>
+
+<body ng-controller="LoginController">
+    <div class="container" ng-init="init()">
+        <div class="page-header">
+          <h1 class="logo">Angular Demo <small>w/ firebase</small></h1>
+        </div>
+        
+        <!-- LOGIN FORM -->
+        <login ng-show="showLogin"></login>
+        
+        <div class="row">
+          <h1>Logged in Users</h1>
+          <!-- DISPLAY SIGNED IN USER -->
+          <ul>
+            <li ng-repeat="profile in loggedInUsers">
+               <user user-data="profile" ng-show="showProfileCard"></user>
+            </li>
+          </ul>
+         
+        </div>
+        
+        <div class="row" style="height: 5px; background-color:#F0F0F0; border-top:2px solid #FFF; margin-top:20px;"></div>
+        
+        <message></message>
+        
+        <div class="row" style="height: 2px; background-color:#F0F0F0; border-top:2px solid #FFF; margin-top:0px;"></div>
+         
+        <stream></stream>
+         
+    </div>
+</body>
+</html>

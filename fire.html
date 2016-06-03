@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="fireUIModel">
+
+  <head>
+    <script data-require="angularjs@1.5.5" data-semver="1.5.5" src="https://code.angularjs.org/1.5.5/angular.js"></script>
+    <link data-require="bootstrap-css@3.3.6" data-semver="3.3.6" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.js"></script>
+    <script src="config.js"></script>
+    <script>
+         // FirebaseUI config.
+            var uiConfig = {
+            'signInSuccessUrl': 'http://angularservicedemo-slysop.c9users.io/fireSuccess.html',
+            'signInOptions': [
+              firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ],
+            // Terms of service url.
+            'tosUrl': 'http://angularservicedemo-slysop.c9users.io/fire.html',
+            };
+             // Initialize the FirebaseUI Widget using Firebase.
+            var app = firebase.initializeApp(config);
+            var auth = app.auth();
+            var ui = new firebaseui.auth.AuthUI(auth);
+            // The start method will wait until the DOM is loaded.
+            ui.start('#firebaseui-auth-container', uiConfig);
+                
+    </script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/0.4.0/firebase-ui-auth.css" />
+  </head>
+
+  <body>
+    <div ng-controller="FireController" class="container" style="padding-top:30px">
+      <h1>{{title}}</h1>
+      <h2>From Group : <span style="font-weight:100">{{subtitle}}</span></h2>
+      <div id="firebaseui-auth-container"></div>
+      
+    </div>
+ 
+    <script src="fire.js"></script>
+  </body>
+
+</html>

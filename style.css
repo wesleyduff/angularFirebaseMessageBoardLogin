@@ -1,0 +1,184 @@
+/*Login */
+body {
+    background: -webkit-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* Chrome 10+, Saf5.1+ */
+    background:    -moz-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* FF3.6+ */
+    background:     -ms-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* IE10 */
+    background:      -o-linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* Opera 11.10+ */
+    background:         linear-gradient(90deg, #16222A 10%, #3A6073 90%); /* W3C */
+    font-family: 'Raleway', sans-serif;
+}
+
+p {
+	color:#CCC;
+}
+
+/* Forms */
+.input-md {
+    margin-bottom:10px !important;
+}
+
+.spacing {
+	padding-top:7px;
+	padding-bottom:7px;
+}
+
+.logo {
+	color:#CCC;
+}
+
+/* -- END LOGIN 0 */
+
+.social-buttons button {
+    display:block;
+    margin:15px 0;
+    min-width : 265px;
+}
+
+h1 {
+    color:#F0F0F0;
+}
+
+/* 
+User 
+*/
+.twPc-div {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #e1e8ed;
+    border-radius: 6px;
+    height: 200px;
+    max-width: 340px; // orginal twitter width: 290px;
+    position:relatve;
+}
+.twPc-bg {
+    background-image: url("https://pbs.twimg.com/profile_banners/50988711/1384539792/600x200");
+    background-position: 0 50%;
+    background-size: 100% auto;
+    border-bottom: 1px solid #e1e8ed;
+    border-radius: 4px 4px 0 0;
+    height: 95px;
+    width: 100%;
+}
+.twPc-block {
+    display: block !important;
+}
+.twPc-button {
+    margin: -35px -10px 0;
+    text-align: right;
+    width: 100%;
+}
+.twPc-avatarLink {
+    background-color: #fff;
+    border-radius: 6px;
+    display: inline-block !important;
+    float: left;
+    margin: -30px 5px 0 8px;
+    max-width: 100%;
+    padding: 1px;
+    vertical-align: bottom;
+}
+.twPc-avatarImg {
+    border: 2px solid #fff;
+    border-radius: 7px;
+    box-sizing: border-box;
+    color: #fff;
+    height: 72px;
+    width: 72px;
+}
+.twPc-divUser {
+    margin: 5px 0 0;
+}
+.twPc-divUser a {
+    margin-top:5px;
+    display: inline-block;
+}
+.twPc-divName {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21px;
+}
+.twPc-divName a {
+    color: #F0F0F0 !important;
+}
+.twPc-divStats {
+    margin-left: 11px;
+    padding: 10px 0;
+}
+.twPc-Arrange {
+    box-sizing: border-box;
+    display: table;
+    margin: 0;
+    min-width: 100%;
+    padding: 0;
+    table-layout: auto;
+}
+ul.twPc-Arrange {
+    list-style: outside none none;
+    margin: 0;
+    padding: 0;
+}
+.twPc-ArrangeSizeFit {
+    display: table-cell;
+    padding: 0;
+    vertical-align: top;
+}
+.twPc-ArrangeSizeFit a:hover {
+    text-decoration: none;
+}
+.twPc-StatValue {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.15s ease-in-out 0s;
+}
+.twPc-StatLabel {
+    color: #8899a6;
+    font-size: 10px;
+    letter-spacing: 0.02em;
+    overflow: hidden;
+    text-transform: uppercase;
+    transition: color 0.15s ease-in-out 0s;
+}
+
+/*
+STREAM
+*/
+#stream {
+    border:1px solid #F0F0F0;
+    margin-top:20px;
+    padding:10px 10px 10px 0;
+}
+#stream h1 {
+    border-bottom:1px solid #F0F0F0;
+}
+
+.media .media-object { max-width: 120px; }
+.media-body { position: relative; }
+.media-date { 
+    position: absolute; 
+    right: 25px;
+    top: 25px;
+}
+.media-date li { padding: 0; }
+.media-date li:first-child:before { content: ''; }
+.media-date li:before { 
+    content: '.'; 
+    margin-left: -2px; 
+    margin-right: 2px;
+}
+.media-comment { margin-bottom: 20px; }
+.media-replied { margin: 0 0 20px 50px; }
+.media-replied .media-heading { padding-left: 6px; }
+
+#logout {
+    position:absolute;
+    top:10px;
+    right:10px;
+    width:100px;
+}
+
+#messageForm {
+    background-color:#F0F0F0;
+    border-radius: 10px;
+    padding-bottom:25px;
+    margin:15px 0;
+}

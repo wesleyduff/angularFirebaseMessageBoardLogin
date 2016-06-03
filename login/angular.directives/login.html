@@ -1,0 +1,40 @@
+<div class="panel panel-info">
+      <div class="panel-heading">
+        
+        <h3 class="panel-title">Please Sign In</h3>
+        <div class="row">
+           <div class=" col-xs-6 col-offset-6"></div>
+           <div class=" col-xs-6">
+              <form class="pull-right" ng-submit="anonymous()">
+                <button tyle="submit" class="btn btn-info btn-sm">Stay Anonymous</button>
+              </form>
+          </div>
+        </div>
+       
+      </div>
+      <div class="panel-body">
+
+          <div class="row">
+            <div class="col-md-6 social-buttons">
+              <button class="btn btn-lg btn-primary" ng-click="loginWith('facebook')">Login w/ Facebook</button>
+              <button class="btn btn-lg btn-primary" ng-click="loginWith('google')">Login w/ Google</button>
+              <button class="btn btn-lg btn-primary" ng-click="loginWith('github')">Login w/ GitHub</button>
+            </div>
+            <div class="col-md-6" style="border-left:1px solid #ccc;">
+                <form class="form-horizontal">
+                    <fieldset>
+                    
+                      <input id="textinput" name="textinput" type="text" placeholder="Enter User Name" class="form-control input-md">
+                      <div class="spacing"><input type="checkbox" name="checkboxes" id="checkboxes-0" value="1"><small> Remember me</small></div>
+                      <input id="textinput" name="textinput" type="text" placeholder="Enter Password" class="form-control input-md">
+                      <div class="spacing"><a href="#"><small> Forgot Password?</small></a><br/><br/></div>
+                      
+                      <button id="singlebutton" name="singlebutton" class="btn btn-info btn-lg pull-right">Sign In</button>
+                      <a href="/Register/register.html" id="singlebutton" name="singlebutton" class="btn btn-warning btn-lg">Register</a>
+                    
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
