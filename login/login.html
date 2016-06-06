@@ -5,6 +5,7 @@
     <title>Sample FirebaseUI App : Login</title>
     <!-- Angular -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.6/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-cookies.js"></script>
     <!-- Firebase -->
     <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
     <!-- AngularFire -->
@@ -23,6 +24,7 @@
 
 <body ng-controller="LoginController">
     <div class="container" ng-init="init()">
+      <button ng-show="showLogout" id="logout" ng-click="logOut()" class="btn btn-primary btn-sm">Logout</button>
         <div class="page-header">
           <h1 class="logo">Angular Demo <small>w/ firebase</small></h1>
         </div>
@@ -31,19 +33,15 @@
         <login ng-show="showLogin"></login>
         
         <div class="row">
-          <h1>Logged in Users</h1>
+          <h1>{{LoggedInUsersTitle}}</h1>
           <!-- DISPLAY SIGNED IN USER -->
-          <ul>
-            <li ng-repeat="profile in loggedInUsers">
+          <ul class="col-xs-12">
+            <li class="profile" ng-repeat="profile in loggedInUsers">
                <user user-data="profile" ng-show="showProfileCard"></user>
             </li>
           </ul>
          
         </div>
-        
-        <div class="row" style="height: 5px; background-color:#F0F0F0; border-top:2px solid #FFF; margin-top:20px;"></div>
-        
-        <message></message>
         
         <div class="row" style="height: 2px; background-color:#F0F0F0; border-top:2px solid #FFF; margin-top:0px;"></div>
          

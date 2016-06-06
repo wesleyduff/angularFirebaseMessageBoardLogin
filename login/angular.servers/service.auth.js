@@ -70,7 +70,7 @@
                     return deffered.promise;
                 },
                 returnLoggedInUsers : function(){
-                    var ref = new Firebase("boilerplate-angular.firebaseIO.com/LoggedInUsers");
+                    var ref = new Firebase("boilerplate-angular.firebaseIO.com/loggedInUsers");
                     var _list = $firebaseArray(ref);
                     _list.$loaded().then(function(returnList){
                         return returnList;
@@ -84,7 +84,7 @@
                     return _list;
                 },
                 checkForAuthUser : function(signedInUserObj, callback){
-                    var ref = new Firebase("boilerplate-angular.firebaseIO.com/LoggedInUsers");
+                    var ref = new Firebase("boilerplate-angular.firebaseIO.com/loggedInUsers");
                     var _list = $firebaseArray(ref);
                     _list.$loaded().then(function(returnList){
                        //check list of signed in user
@@ -94,11 +94,12 @@
                        for(var i = 0; i < returnList.length; i++){
                            if(returnList[i].name === signedInUserObj.name){
                                found = true;
+                               signedInUserObj.$id = returnList[i].$id;
                            }
                        }
                        if(!found){
                             this.addTo('loggedInUsers', signedInUser).then(function(ref){
-                                  callback({status: true, user : signedInUserObj});
+                                  callback({status: true, user : ref});
                               }, function(err){
                                 console.log('faile');
                                 console.dir(err);
@@ -118,4 +119,23 @@
         }
     })
     
+    .factory('beforeUnload', function ($rootScope, $window) {
+        // Events are broadcast outside the Scope Lifecycle
+        
+        $window.onbeforeunload = function (e) {
+            var confirmation = {};
+            var event = $rootScope.$broadcast('onBeforeUnload', confirmation);
+            if (event.defaultPrevented) {
+                return confirmation.message;
+            }
+        };
+        
+        $window.onunload = function () {
+            $rootScope.$broadcast('onUnload');
+        };
+        return {};
+    })
+    .run(function (beforeUnload) {
+        // Must invoke the service at least once
+    });
 })(angular)

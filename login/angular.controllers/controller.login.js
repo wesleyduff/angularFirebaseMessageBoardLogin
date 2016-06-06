@@ -15,80 +15,98 @@ var signedInUser = {};
   --- We use the "get" HTTP request to get a collection of all of our profile accounts
   --
   */
-  .controller('LoginController', ['$scope', 'Auth', 'fObject', "$firebaseArray", function($scope, Auth, fObject, $firebaseArray){
+  .controller('LoginController', ['$scope', 'Auth', 'fObject', "$firebaseArray", "beforeUnload", "$cookies", function($scope, Auth, fObject, $firebaseArray, beforeUnload, $cookies){
     
     /* on off */
     $scope.showLogin = true;
     $scope.showStream = true;
     $scope.showProfileCard = false;
+    $scope.showLogout = false;
     
     
+    /*
+    HANDLE page leave functionality.
+    - Log out the user if they leave the page with confirmation
+    */
+    $scope.$on('onBeforeUnload', function (e, confirmation) {
+      e.preventDefault();
+      $scope.logOut(false);
+    });
+    
+    $scope.$on('onUnload', function (e) {
+        console.log('leaving page'); // Use 'Preserve Log' option in Console
+    });
     
     $scope.init = function(){
         var authData = Auth.$getAuth();
         
-        if (authData) {
-         // $scope.user = authData;
-          $scope.showLogin = false;
-          $scope.showProfileCard = true;
-          
-          //bind logged in users 
-          var ref = new Firebase("boilerplate-angular.firebaseIO.com/loggedInUsers");
-          $scope.loggedInUsers = $firebaseArray(ref);
-          
-          //If no one logged in then show message
+        var ref = new Firebase("boilerplate-angular.firebaseIO.com/loggedInUsers");
+        $scope.loggedInUsers = $firebaseArray(ref);
           $scope.loggedInUsers.$loaded(function(){
-            if($scope.loggedInUsers.length === 0){
-              //TODO ://
-             //show message here saying - :( No one is online to talk to.
+            if($scope.loggedInUsers.length > 0){
+              $scope.showProfileCard = true;
+              $scope.LoggedInUsersTitle = "Logged in Users";
+            } else {
+              $scope.LoggedInUsersTitle = "No one is currenlty logged in.";
             }
           });
-          
-          /*
-          //Check to see if the user is loged in. Authenticated
-          fObject.loggedInUsers.checkForAuthUser(
+        
+        
+        /* If we have a logged in User */
+        if (authData) {
+         // $scope.user = authData;
+          $scope.showLogout = true;
+          $scope.showLogin = false;
+          fObject.LoginMethods.checkForAuthUser(
             signedInUser = {
               name : authData.facebook.displayName,
-              email : authData.facebook.email,
+              email : authData.facebook.email !== undefined ? authData.facebook.email : 'Not provided',
               image : authData.facebook.profileImageURL
             }, function(result){
               if(result.status){
-                $scope.loggedInUsers.push(result.user);
-                $scope.showLogin = false;
-                $scope.showProfileCard = true;
+                signedInUser = result.user;
+                $cookies.put('signedInUser', JSON.stringify(signedInUser));
               } else {
                 //error occured
                 console.dir(result);
               }
             });
-          */
           
-          //save user as being logged in
-          /*
-          fObject.LoginMethods.addTo('loggedInUsers', signedInUser).then(function(ref){
-              console.dir(res);
-              signedInUser.id = ref.key();
-          }, function(err){
-            console.log('faile');
-            console.dir(err);
-          });
-          */
+          
           
         } else {
-          console.log("Logged out");
+          //get a list of loged in users and display
+          //check cookies and see if they have a cookie set
+          var signedInUser_from_cookie = $cookies.getObject('signedInUser');
+          if(signedInUser_from_cookie !== null && signedInUser_from_cookie !== undefined){
+            signedInUser = signedInUser_from_cookie;
+            $scope.loggedInUsers.$add({name: signedInUser.name, email: signedInUser.email, image : signedInUser.image}).then(function(result){
+              signedInUser.$id = result.key();
+              $cookies.put('signedInUser', JSON.stringify(signedInUser));
+              $scope.showLogin = false;
+              $scope.showLogout = true;
+            });
+          }
         }
     }
     
-    $scope.logOut = function(){
-      fObject.LoginMethods.removeFrom('loggedInUsers', signedInUser.$id).then(function(ref){
-        console.dir(ref);
-      }, function(err){
-        console.dir(err);
-      });
-      
-      Auth.$unauth();
-      $scope.showProfileCard = false;
-      $scope.showLogin = true;
+    $scope.logOut = function(withCookie = true){
+      if(signedInUser !== undefined || signedInUser !== null){
+        fObject.LoginMethods.removeFrom('loggedInUsers', signedInUser.$id).then(function(ref){
+          console.dir(ref);
+        }, function(err){
+          console.dir(err);
+        });
+        
+        Auth.$unauth();
+        $scope.showProfileCard = false;
+        $scope.showLogin = true;
+        
+        if(withCookie){
+          $cookies.remove('signedInUser');
+        }
+        
+      }
     };
     
     $scope.anonymous = function(){
@@ -109,17 +127,19 @@ var signedInUser = {};
                     $scope.user = authData;
                     $scope.showLogin = false;
                     $scope.showProfileCard = true;
+                    $scope.showLogout = true;
                     
                     signedInUser = {
                       name : authData.facebook.displayName,
-                      email : authData.facebook.email,
+                      email : authData.facebook.email !== undefined ? authData.facebook.email : 'Not provided',
                       image : authData.facebook.profileImageURL
                     };
           
-          
                     fObject.LoginMethods.addTo('loggedInUsers', signedInUser).then(function(result){
-                        console.dir(result);
+                      
                         signedInUser.$id = result.ref.key();
+                        $cookies.put('signedInUser', JSON.stringify(signedInUser));
+                        
                     }, function(err){
                       console.log('faile');
                       console.dir(err);

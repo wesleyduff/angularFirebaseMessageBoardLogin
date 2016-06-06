@@ -8,7 +8,7 @@
         - Access to our Service Model
         - Access to our Fire Base Directives
     */
-    var LoginUIModel = angular.module('LoginUIModule', ["firebase"]);
+    var LoginUIModel = angular.module('LoginUIModule', ["firebase", "ngCookies"]);
          // Instantiates the Firebase Auth instance.
       
     /* ------------------------------------------------*/

@@ -1,4 +1,9 @@
+
 <h1>{{$ctrl.title}}</h1>
-<div id="stream">
+<message post-value="$ctrl.postValue" on-post="$ctrl.addPost($ctrl.postValue);"></message>
+
+<div class="row" style="height: 5px; background-color:#F0F0F0; border-top:2px solid #FFF; margin-top:20px;"></div>
+        
+<ul id="stream">
     <streampost ng-repeat="post in $ctrl.posts" post="post"></streampost>
-</div> 
+</ul> 

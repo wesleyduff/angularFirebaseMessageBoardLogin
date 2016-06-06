@@ -21,13 +21,7 @@
         return {
             templateUrl : '/login/angular.directives/login.html'
         }
-    })
-    
-    .directive('message', function(){
-        return {
-            templateUrl : '/login/angular.directives/messageForm.html'
-        }
-    })
+    });
     
     
 })(angular);

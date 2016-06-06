@@ -1,0 +1,7 @@
+<div class="row">
+    <form id="messageForm" class="col-xs-12">
+        <legend>Message - </legend>
+        <input class="form-control" type="text" name="message" ng-model="$ctrl.postValue" placeholder="Add a message here..." />
+        <button ng-click="$ctrl.addPost({post: $ctrl.postValue})" class="btn btn-primary btn-lrg">Add</button>
+    </form>
+</div>
