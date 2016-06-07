@@ -2,38 +2,38 @@
     'use strict'
     
     /* CONTROLLERS */
-    function StreamController($scope, $element, $attrs){
+    function StreamController($scope, $element, $attrs, $firebaseArray){
         var ctrl = this;
         
         ctrl.title = "Stream";
-        ctrl.posts = [
-            {
-                from: {
-                    name: "wes"
-                },
-                message : "Howdy!!"
-            } ,
-            {
-                from: {
-                    name: "bob"
-                },
-                message : "Howdy 2 U!!"
-            }  
-        ];
+        var ref = new Firebase("boilerplate-angular.firebaseIO.com/Posts");
+        ctrl.posts = $firebaseArray(ref);
         
-        ctrl.addPost = function(post){
-            console.log(post);
+        ctrl.post = function(post, user){
+            console.log('POST IN STREAM')
+            console.dir(post);
         }
     }
     
     function StreamPostController($scope, $element, $attrs){
         var ctrl = this;
-        
+       
         
     }
     
-    function MessagesController($scope, $element, $attrs){
-        var ctrl = this;
+    function MessagesController($scope, $element, $attrs, MessagingService, $cookies){
+        
+        var ctrl = this,
+            _signedInUser_from_cookie = $cookies.getObject('signedInUser')
+        ctrl.showMessageForm = _signedInUser_from_cookie !== undefined ? true : false;
+        ctrl.errorMessages = []; //list of errors that happened during a post
+        ctrl.addPost = function(post){
+            MessagingService.postMessage({user: _signedInUser_from_cookie, article: post}, "Posts").then(function(result){
+                ctrl.onPost({content: result, user: _signedInUser_from_cookie});
+            }, function(err){
+                ctrl.errorMessages.push({alertType: 'alert-danger', err: 'err'}); //add an error to the error list to show on the UI
+            });
+        }
     }
     
     angular.module('LoginUIModule')
@@ -53,7 +53,6 @@
     
     .component('message', {
         bindings : {
-            postValue : '@?',
             onPost : '&'
         },
         templateUrl: '/login/angular.components/messageForm.html',

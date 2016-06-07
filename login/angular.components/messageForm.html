@@ -1,7 +1,18 @@
-<div class="row">
+<div ng-if="$ctrl.showMessageForm" class="row">
     <form id="messageForm" class="col-xs-12">
-        <legend>Message - </legend>
+        <br/>
+        <legend ng-if="$ctrl.errorMessages.length">Error Message(s) - 
+            <br/>
+             <div ng-repeat="message in $ctrl.errorMessages" class="col-xs-12">
+                <div class="ng-class: message.alertType; alert">{{message.err}}</div>
+            </div>
+        </legend>
+        <legend ng-if="$ctrl.errorMessages.length === 0">
+            Add A Post
+        </legend>
+       
         <input class="form-control" type="text" name="message" ng-model="$ctrl.postValue" placeholder="Add a message here..." />
-        <button ng-click="$ctrl.addPost({post: $ctrl.postValue})" class="btn btn-primary btn-lrg">Add</button>
+        <br/>
+        <button ng-click="$ctrl.addPost($ctrl.postValue)" class="btn btn-primary btn-lrg pull-right">Add</button>
     </form>
 </div>
