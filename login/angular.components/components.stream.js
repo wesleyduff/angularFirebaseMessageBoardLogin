@@ -34,6 +34,11 @@
                 ctrl.errorMessages.push({alertType: 'alert-danger', err: 'err'}); //add an error to the error list to show on the UI
             });
         }
+        
+        //listen for the custom event to show or hide the message form
+        $scope.$on('messageFormVisibilityChanged', function (event, data) {
+          ctrl.showMessageForm = true;
+        });
     }
     
     angular.module('LoginUIModule')

@@ -9,7 +9,7 @@
         return $firebaseAuth(ref); 
     })
     
-    .factory('fObject', function($firebaseObject, $firebaseArray, $q){
+    .factory('fObject', function($firebaseObject, $firebaseArray, $q, MessagingService){
         var ref = new Firebase("boilerplate-angular.firebaseIO.com");
         
         return {
@@ -48,6 +48,7 @@
                     _list.$add(obj).then(function(ref){
                         var id = ref.key();
                         console.log("added record with id " + id);
+                        MessagingService.setMessageFormVisibility(true);
                         deffered.resolve({status: true, ref: ref});
                     }, function(err){
                         deffered.reject({status: false, err: err});
@@ -106,6 +107,7 @@
                                 callback({status: false, error: err});
                               });
                        } else {
+                           MessagingService.setMessageFormVisibility(true);
                            callback({status: true, user : signedInUserObj});
                        }
                     }, function(err){

@@ -3,7 +3,7 @@
     
     angular.module('LoginUIModule')
     
-    .factory('MessagingService', function( $firebaseObject, $firebaseArray, $q){
+    .factory('MessagingService', function( $firebaseObject, $firebaseArray, $q, $rootScope){
         return {
             postMessage : function(post, name){
                 var ref = new Firebase("boilerplate-angular.firebaseIO.com/" + name);
@@ -24,7 +24,15 @@
                 var ref = new Firebase("boilerplate-angular.firebaseIO.com/Messages");
                 var _list = $firebaseArray(ref);
                 return _list;
-            }
+            },
+            setMessageFormVisibility : function(val){
+                this.messageFormVisibility = val;
+                $rootScope.$broadcast('messageFormVisibilityChanged');
+            },
+            getMessageFormVisibility : function(){
+                return this.messageFormVisibility;
+            },
+            messageFormVisibility : true
         }
     });
     
