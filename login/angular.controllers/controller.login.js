@@ -93,19 +93,17 @@ var signedInUser = {};
     $scope.logOut = function(withCookie = true){
       if(signedInUser !== undefined || signedInUser !== null){
         fObject.LoginMethods.removeFrom('loggedInUsers', signedInUser.$id).then(function(ref){
-          console.dir(ref);
+          
+            Auth.$unauth();
+            $scope.showLogin = true;
+        
+            if(withCookie){
+              $cookies.remove('signedInUser');
+            }
+            
         }, function(err){
           console.dir(err);
         });
-        
-        Auth.$unauth();
-        $scope.showProfileCard = false;
-        $scope.showLogin = true;
-        
-        if(withCookie){
-          $cookies.remove('signedInUser');
-        }
-        
       }
     };
     

@@ -37,7 +37,7 @@
         
         //listen for the custom event to show or hide the message form
         $scope.$on('messageFormVisibilityChanged', function (event, data) {
-          ctrl.showMessageForm = true;
+          ctrl.showMessageForm = MessagingService.getMessageFormVisibility();
         });
     }
     

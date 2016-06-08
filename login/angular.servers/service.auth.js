@@ -63,9 +63,13 @@
                     _list.$loaded().then(function(returnedList){
                         var record = _list.$getRecord(obj);
                         _list.$remove(record).then(function(ref){
+                            //remove the ability to add messages because the user has logged out
+                            MessagingService.setMessageFormVisibility(false);
+                            
                             deffered.resolve({status: true, ref: ref});
                         }, function(err){
-                            deffered.reject({status: false, err: err});
+                            
+                           deffered.resject({status: false, err: err});
                         })
                     });
                     return deffered.promise;
@@ -85,8 +89,11 @@
                     return _list;
                 },
                 checkForAuthUser : function(signedInUserObj, callback){
+                    
                     var ref = new Firebase("boilerplate-angular.firebaseIO.com/loggedInUsers");
                     var _list = $firebaseArray(ref);
+                    
+                    
                     _list.$loaded().then(function(returnList){
                        //check list of signed in user
                        //if exists then return null
@@ -99,7 +106,7 @@
                            }
                        }
                        if(!found){
-                            this.addTo('loggedInUsers', signedInUser).then(function(ref){
+                            _list.$add(signedInUser).then(function(ref){
                                   callback({status: true, user : ref});
                               }, function(err){
                                 console.log('faile');
